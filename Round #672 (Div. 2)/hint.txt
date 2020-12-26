@@ -1,0 +1,6 @@
+https://codeforces.com/contest/1420
+https://www.youtube.com/watch?v=97tieEKfvBs&ab_channel=GennadyKorotkevich
+C1: fill比memset更好用，memset是对每个byte操作
+C2: 重点是要意识到选择的元素是有规律的，可以用greedy，不需要dp，从而可以降低复杂度。并且在erase和insert时不能对重复元素操作。遇到题目，要思考是用dp, greedy还是complete search
+D: 对于多次计算n choose k时要将结果缓存下来以加速，并且用到乘法逆元和快速幂。乘法逆元：b, m互质，并且b|a，则存在x使得a/b同余a*x (mod m)
+E: 难点是将原问题转化为一个形式较简单的dp问题，此处的dp每步是从dp[i][j][k]向之后扩展。在转化时要想到把0 group起来，并且想到转化计算result的方法。当要输出多个值的时候，则dp多半会与那个值有关，即这里的step

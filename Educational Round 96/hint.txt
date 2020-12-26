@@ -1,0 +1,5 @@
+https://codeforces.com/contest/1430
+A_better: 其实只要通过3的余数来判断就行
+E_bad: 对于只出现过一次的字母，必定要将其移动到指定位置。对于出现多次的字母，重要的observation是要将他们一起平移到指定的位置。因此可以对每个位置写出其最后的位置，例如[2,4,3,5,1]，我们要用swap来将其sort。需要的操作数与数列中所有inversion pair的数量相同。用bubble sort的方法是O(n^2)
+E_merge: O(nlogn)，用merge sort的变式，在merge的时候，当出现后半段的值要插到前半段值之前的情况，就需要数一下inversion的数量
+E_fenwick: O(nlogn)，每插入一个数字更新所有比他大的位置，将他们都+1，所以query一个数时就可以得知在已处理的数中有多少比他小，然后再用i减去，就可以知道有多少在之前的数比其大，也就是存在的inversion数

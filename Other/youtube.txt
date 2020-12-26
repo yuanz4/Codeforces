@@ -1,0 +1,20 @@
+1. OBS录制，用photo editor做剪辑
+2. 每次录制前检测声音大小，应该要达到黄色，如果有问题可以拔掉重新插入耳机
+
+Codeforces Round #687 (Div. 2) A-E Explanation
+
+Hey guys, this is my third try to explain solutions after contest. I hope to share some thoughts and train expressing myself. It is a very good contest and thanks to the author! https://codeforces.com/contest/1457
+
+It is pretty hard to organize mind clearly and can't speak fluently during recording. Hope I will practice more to become better, both as contestant and youtuber. If there are any suggestions or something I did wrong, I will be very happy to hear suggestions.
+
+0:00 Overview
+1:45 Problem A
+2:51 Problem B
+4:41 Problem C
+9:03 Problem D Sol1
+13:50 Problem D Sol2
+29:39 Problem E Sol1
+41:06 Problem E Sol2
+43:16 Proof for E Sol2
+
+#Coding #Programming

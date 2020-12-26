@@ -1,0 +1,9 @@
+https://codeforces.com/contest/1452
+B: 最后填补的结果可能有很多种，只要保证每个box不超过新的max就行
+D: 一开始觉得像Fibonacci，后来发现可以证明。DP，考虑最后一个town可能的情况，半径可能为1,2,3...例如T(5)=T(4)+T(2)+T(0)，T(7)=T(6)+T(4)+T(2)+T(0) => T(7)=T(6)+T(5)。通过递归可以发现是Fibonacci
+E: 暴力的方法是遍历所有author的情况，共O(n^2)，然后对每个participant计算结果，共O(mn^2)。最重要的observation是对于每个participant，author的segment在移动时先变大后变小，中心与其重合时值必定最大，因此participant会选择中心与其较近的那个author。所以可以将participants的中心进行sort，然后分割成两块，对于每一块计算author在任意位置时所有participant加起来最大的情况，然后两块取和。这里不用担心第二块里的元素会assign到author1，因为那种情况也会被cover到。另外一个dp的optimization是，我们想要对每个j in [1, m]算出前j个的最大和，那这样每个分割需要O(mn)时间，但其实中间有些是可以重复使用的。对于每个i，d[i][j] = d[i][j-1] + (...)，然后需要对所有d[...][j]取最大值。即在算每行的时候需要前一个元素，然后对每列取max。该过程的space可以优化到O(m)。这题最难想到的是可以根据对participants的不同分割求最大和
+    j
+  ...1.  |
+i abcx.  v
+  ...3. max
+ -> +

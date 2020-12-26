@@ -1,0 +1,21 @@
+https://codeforces.com/contest/1460
+华为cloud scheduling
+>>model成为图，每两个状态之间都可以转换，即为无向图
+>>首先考虑得到一种solution，再考虑如何得到更优的
+>>先考虑没有bottleneck的情况
+>>可以每次只移动一个然后再合并
+>>对于已经处于正确位置的vm不用再移动，可能会受bottleneck影响
+>>如果能将所有node和edge列出来，那即是找最短路，但是列出所有可能性是exponential的时间
+>>假如可以把一个node移动到optimal的地方，就直接移动
+>>如果出现deadlock，则可以随机选取一个放到别的地方
+>>有点像华容道，也许可以用BFS
+---------------------------------
+>>用set不能过涉及deadlock的test case只有4个: 10, 12, 16, 22，但是别的有些test case步数非常多
+>>处理deadlock能过所有test case，如果对于每个vm都是直接放到指定位置，那memory就是optimal的，但是step会随着取的顺序不同而不同
+>>最好不用queue，因为在产生deadlock的时候需要让取出的顺序不一样
+>>可以尝试的点是，决定排序的顺序，按server或是vm较大或较小的排
+>>看提示的图，思考为什么在介绍中要分dense和balanced这种，对策略是否有帮助
+---------------------------------
+>>要对步数优化，尽量多的合并，目前是认为bottleneck是1，得要想办法如何判断2 parallel moves，最多减少30*1000*log10(2)=9000，对已有序列compress无法减少太多，所以肯定有哪里还能减少更多
+>>假如只考虑memory，来计算memory的下限，为130062。因此主要任务就是减少step
+>>一种比较简单的方法是考虑用random数字作为key来决定顺序，多shuffle几次取一个最好的，因此也要考虑用更加有效的存储方式使每个iteraion尽量快

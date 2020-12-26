@@ -1,0 +1,3 @@
+https://codeforces.com/contest/1427
+C: 另一种优化的方法是意识到，假如两个事件差的时间大于2r，则一定可以走到，所以只需要考虑2r时间差之内的事件就行了，因此可以简化到O(nr)
+E: 难点是想到coprime的方法，可以这样分解是因为x是odd，所以最后一位是1。另外一个难点是不知道Bezout's theorem和extended gcd

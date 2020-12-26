@@ -1,0 +1,5 @@
+https://codeforces.com/contest/1400
+A: 每两个取一个可以满足条件
+B: 根据时间复杂度限制，可以都试一遍O(n)
+D: 转化成找相同tuple是精髓1，然后遍历的顺序是精髓2，要使得j<k并且已经将一边的所有tuple情况都记录了，同理也可以将k从左往右遍历
+E: 重要的observation是只有两种可能，都减去最小的，或是每一列单独消去，使得可以greedy地用divide and conquer来做。在找一个区间最小值时可以用RMQ

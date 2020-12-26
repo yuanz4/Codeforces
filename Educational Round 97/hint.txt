@@ -1,0 +1,9 @@
+https://codeforces.com/contest/1437
+B: 每次reverse可以最多可以将s_{l-1},s_l与s_r,s_{r+1}这两个pair改变符号，而且他们一开始必然是00和11。每次一定可以取到这样的一对pair，将头尾连在一起
+C: 我自己做的时候定义的dp[i][j]是到i为止并以j结尾
+C_dp: 只需要O(n^2)的dp就行，因为对于每个时间我们可以选择用那个时间或是不用。这里dp[i][j]指的是到i为止到j为止
+C_matching: 可以转化为bipartite matching，左边为n个点，右边为2n个时间，中间的边是cost，因此将问题转化为maximum flow minimum cost
+E: 对于每个区间，需要找到update其中几个使得整个区间是increasing。这里很重要的观测是要找一个最长的不用update的subsequence，然后对剩余元素update。但是考虑到要能在其间插入元素，所以能写出ai-i<=aj-j。然后可以用O(nlogn)的longest non-decreasing subsequence来做，要注意在这里要用upper_bound，因为会有重复元素，我们不想替换一样的元素
+F: 最重要的观测是会有一个increasing的sequence是happy fisherman，然后别的夹在中间的都是unhappy的，如1，2，1，4。
+让d[i][j]代表已经放置了j条鱼，并且以第i条结尾。所以假如下一条是unhappy，要到d[i][j+1]，则共有cntLess[i]-j+1种选择，这里cntLess[i]是在i之前并比他小的，因为a[i]是递增的，所以任意在i之前的k，cntLess[k]必定是cntLess[i]的一个子集，因此我们不用在意之前的unhappy是怎么选的。假如下一条是happy，可以到d[k][j+1]，a[k]>=2*a[i]。
+当我们实际写成计算d[i][j]时，要加上在i之前所有符合要求的d[k][j]，可以发现其实就是加上了所有k<=lastLess，所以可以用prefix sum从O(n^3)加速到O(n^2)。要注意的一点是，在main里面定义的数组是在stack里，太大时会因为stack overflow造成segment fault。因此比较稳妥的是定义成global，成为static，存储在data segment里

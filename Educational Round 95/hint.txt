@@ -1,0 +1,6 @@
+https://codeforces.com/contest/1418
+A: 要注意得用long long不能用double，不然会计算错误
+C: 可以将dp转化为图的问题，然后用Dijkstra's，详见https://codeforces.com/blog/entry/82673?#comment-696615
+D: 重点是要知道给定piles如何计算最短移动次数，用prev和next来对iterator操作 (能用的还有advance和distance)，要注意最开始的pile不是顺序的，并且要讨论piles<=2的情况
+E: 难点是对单个shield如何计算expectation，将结果化为probability。第二个难点是想到记录下伤害的prefix并且用binary search寻找位置。另外，当写成P*Q^-1形式时，则可以直接相加
+G_hash: 首先要想到可以先比较3的倍数的情况，然后可以记录最后三个的位置来排除不可能的情况。另外一个难点是关于如何记录状态，可以用polynomial rolling hash，但是这里介绍了更好的方法

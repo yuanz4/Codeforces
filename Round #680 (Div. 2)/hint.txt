@@ -1,0 +1,5 @@
+https://codeforces.com/contest/1445
+B: 可以人为构造使其满足
+C: 质因数分解，不能整除的条件是有一个在q中的质因数不存在于p中
+D: 在分析中有发现p和q的元素应该来自于左半部分和右半部分，但是没想到这样就说明了每次的和都是一样的，大减小。应该仔细看看例子，并在纸上多写几个例子，会发现每个partition的结果都是一样的。其实知道时间复杂度很小为O(n)的时候就不该去想dp之类的方法
+E: 问题可以转换为能否找到两个group使得其可以组成bipartite。bipartite的特征是不能存在奇数环，可以用dsu来online(一边加边一边判断包含某点的connected components是不是bipartite)地check是否是bipartite。先将group内的边全部相连，将内部存在奇数环的排除掉。然后对每两个group检测加上那些边以后是否是一个bad pair，这样每条边只会被访问一次，所以该操作为O(m)。检测完每个pair之后rollback到之前只有内部边相连的版本。如果将原版本的信息都复制一遍非常慢，这里有一个高效地分离出来一个版本的optimization。我们其实只关心相连两个group的那些边的点，并且只关心他们的parent以及他们parent的parent是和原版本相同的，因此只复制这些点的信息就足以，这样最多O(n)

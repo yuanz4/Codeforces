@@ -1,0 +1,13 @@
+https://codeforces.com/contest/1450
+C1: 试了几种满token的情形，没有证明，碰巧写对的。其实可以根据(i+j)%3将grid染色，可以发现只要我们flip任意一种颜色的token就能满足条件。k=x0+x1+x2，min(x0, x1, x2)<=k/3
+C2: 同样的染色方法，k=o0+o1+o2+x0+x1+x2，先对o选一种颜色flip，然后对x选一种颜色flip。令aij代表color为i的要flip的x和color为j的要flip的o，aij=xi+oj。a01+a02+a10+a11+a20+a21=2k，min(a01, a02, a10, a11, a20, a21)<=k/3
+D: 一开始陷入了死胡同，想要想一种有效的将相邻元素取min的合并方法，比如从[1,5,3,4,2]到[1,3,3,2]，想要从O(n^2)优化到O(nlogn)。有想过用序列上升和下降的性质，比如上升的序列不会改变，而下降的序列最大的元素会被最小的元素替换，并且插到尾部，因此最小的元素会重复出现直到替换所有。我想要设计一种数据结构来只对每个下降序列更新，但是很难做到因为需要O(1)的删除插入元素，可能需要double linked list。另外需要一个map来记录信息的改动，从而可以快速判断是否满足permutation。这样很难实现，更大的问题是对于每个k要更新的时间最坏仍然为O(n)，所以不一定能行得通。其实这里我们记录的信息过剩，毕竟结果只需要我们得到是否是permutation而不在乎每次合并的结果是什么。所以我们记录了过剩的信息，也自然会导致更高的时间复杂度
+D_sparse_table: 当k=1时，检测整个sequence是不是permutation。当k=n时，检测最小值是否为1。另外情况下，1应当只出现一次，所以只可能出现在开头或者结尾，假如不存在则不是permutation，假如出现在中间或者两头都有那么1在之后会出现多次也不符合，因此不满足条件就可以终止，之后的情况也都是不满足的。然后check剩下range里最小的值（会合并为一个值），应当为i+1。然后再找第二小的，缩短range，这样iteratively地找。找rmq可以用sparse table，为O(nlogn)
+D_cnt: 也可以用cnt来记录每个数出现的个数，然后通过cnt[i]==1和cnt[i+1]来check是否满足条件，为O(n)
+E: editorial里面的证明非常严谨，但我想从直观的角度进行分析：
+1. 每条边连接的两个点奇偶性不同，所以图必须要要是bipartite的。bipartite指的是点能够分为两个set的图，对bipartite的check与有向无向图无关，可以在任意时候进行
+2. 假如从u到v有多条路径，那我们需要通过调整方向来使这多条路径的距离差值一致并且最大。通过给边assign weight，保证undirected双向都最大为1，这样可以令u到v的每条路都为最长的。这样也说明了每条路可以更加短，并且由于是bipartite总能够缩到和别的路一样的长度，但是无法更长，所以u到v的路得要对齐到最短路，那个已经是upper bound
+3. 那么什么时候会出现多条路不能对齐的情况：假如从u到v有两条路，对于每条路我们将其分为dir和un，分别代表directed的和与undirected的和，然后在这里dir1+un1!=dir2+un2，un1 in [-a, a]，un2 in [-b, b]，dir1-dir2!=un2-un1，un2-un1 in [-a-b, a+b]，也就是说dir1-dir2<-a-b or dir1-dir2>a+b => a+b+/-(dir1-dir2)<0，因为在这里取cycle时a+b一定是正的，所以这里等效的情形是出现负环
+4. 最终的结果中必然有一点是最小点，因此我们从每一点去找它到别的点的最短路径，然后最远的那个距离就是答案。但是如果有a值小于0的点怎么办，比如有一条u->v，v是原点，那么说明v不是最优点，答案肯定包括在别的点里
+5. 一些对editorial的解释：当选定一个点作为source，将a(i)设置为d(i)，接下来要证明这样的ai都是满足条件的。根据shortest path的性质和bipartite，d(u)+w(u,v)>=d(v) => d(u)+1>=d(v)：对于directed edge u->v，d(v)-d(u)<=1，d(v)-d(u)>=1 => d(v)-d(u)=1 => a(v)-a(u)=1；对于undirected edge u v，d(v)-d(u)<=1 => a(v)-a(u)<=1，d(u)-d(v)<=1 => a(u)-a(v)<=1，|a(u)-a(v)|<=1 => |a(u)-a(v)|=1
+F: 对于一个满足条件的permutation，在那些jump的点进行cut，每个segment内部是顺序的，然后对这些segments进行reorder和reverse可以得到原来的sequence。那在原sequence中如何取这些cut的点，首先那些连续相同的点一定需要断开，然后我们希望重新连接这些segments使得没有连续的tag。问题转化为：切k次得到一堆零散的segments，我们只关注每个segment的两个endpoints，希望通过某种连接使得没有连续的tag。假如存在这样一种连接，那么我们可以拼接起来并且最小cost是k。记录每种tag作为endpoints出现了f(x)次，然后证明可以直接拼接的充要条件是f(x)<=k+2（详见editorial）。对于f(x)>k+2的情况，每切割两个非x的元素，会将k+1并且不影响f(x)
