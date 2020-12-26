@@ -1,4 +1,4 @@
-1. OBS录制，用photo editor做剪辑
+1. OBS录制，用Photo editor做剪辑
 2. 每次录制前检测声音大小，应该要达到黄色，如果有问题可以拔掉重新插入耳机
 
 Codeforces Round #687 (Div. 2) A-E Explanation
