@@ -1,2 +1,2 @@
 # Codeforces
-My solutions and hints for some codeforces contests.
+My solutions and hints for some codeforces contests
