@@ -2,4 +2,5 @@ https://codeforces.com/contest/1380
 A: 我想的是用prefix/suffix minima来做，但的确只需要检测每个triples就能判断是否存在答案
 E_dsu: 简化计算difficulty的方法，其实就是找相邻元素不同的个数，在每次merge之后需要更新每个元素属于的disc。假如用dsu比较直观，即每次merge更新每个元素，然后检测多少个相邻不同的变成相同的了，这样是O(n^2)。使用路径压缩和按秩合并，可以将其降低到O(nlogn)
 E_lca: 转化思路，很巧妙，我们要知道每两个相邻元素在什么时候merge了，因此可以把所有的merge转化成一棵树，然后对每两个元素找其lca
+F: 假如不用update，那可以用一维dp来做，考虑每个字符被包括在一位或两位的数字中，这样是O(n)。假如需要update，用segment tree来做，表示为[l, r]区间内的划分方法数量。在merge的时候因为要考虑到两个block相邻元素构成数字的情况，即OOOX与XOOO合并的情况，所以要保留左右边各空缺一个元素的情况，因此需要保留四个值：OOOO, OOOX, XOOO, XOOX才能够update。需要注意merge长度为1时的边界情况，并且只有当左边的数字为1时才可能和右边组成两位数。最终时间复杂度为O(n+mlogn)
 G: 这道题先将要求的结果用数学公式表示出来，以mimic chest为结尾将所有数划分为k个interval，然后下一步重要的则是证明了每个interval的长度是可以optimal地求出来的。然后接下来则是将所有frequency sort并assign到不同的chest上。最后的一个observation是发现frequency是以一段一段出现的，所以可以用prefix来加速，根据harmonic number加速到O(nlogn)
