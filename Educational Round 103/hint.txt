@@ -1,0 +1,4 @@
+https://codeforces.com/contest/1476
+B: 在比较的时候别忘了用ceiling
+C: 要注意当a>b的时候要交换
+E: 对每个s找到与其匹配的p，然后第一个出现的p[mt]应该出现在所有别的p之前，所以用directed edges从p[mt]指向别的p。然后最后假如是DAG则存在解，就是topological sort的结果。拓扑排序时同样的边出现多次也没有关系，所以可以用vector，不用考虑重复的边，会快一点
