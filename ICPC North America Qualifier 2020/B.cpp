@@ -13,7 +13,6 @@ struct circle {
 int main() {
 	ios_base::sync_with_stdio(false);
     cin.tie(0);
-	cout.precision(9);
 	int n;
 	cin >> n;
 	vector<circle> info(n);
@@ -102,6 +101,7 @@ int main() {
 		total -= end - start;
 		ans += total * info[i].r;
 	}
+	cout.precision(9);
 	cout << fixed << ans << '\n';
 	return 0;
 }
