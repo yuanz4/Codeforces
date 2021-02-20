@@ -1,0 +1,4 @@
+https://codeforces.com/group/tKC7z9Nm0A/contest/316977
+C: 如何理解i<a和a<=i<b的情况
+D: 要注意最终的结果可以表示成ways(B)-ways(A-1)。因为每个重量满足至少两倍大的关系，所以对于每个元素假如没有超过上限，则可以选或者不选当前元素，假如不选的话，那剩下的元素和一定小于上限，可以用n choose k来做
+E: 对于每个点考虑，可能有偶数或者奇数边，分别写成xor的式子，然后用gaussian elimination来看看有没有解
