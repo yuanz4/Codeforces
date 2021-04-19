@@ -2,3 +2,16 @@ https://codeforces.com/contest/1486
 C1: 用binary search来查询第二大的smax是在左边还是右边，即查询整段的smax，并且查询包含smax的那半段来检测max是否在那一段。要注意假如那一段的长度是1，说明只包含smax，则不存在max，可以返回-1，这样就不等于smax，也就不会选那一段
 C2: 先找出全局的smax，然后对包含smax的那一段做binary search，比如[smax, i]，找到最左边的i使得其query结果是smax，说明i就是max
 D: 这道题不能用sliding window做，因为不存在单调的f(i)。假如现在是average(median应该也能找出反例)，n=4, k=2, a=[1, 3, 4, 3]，对于1来说最佳的是到最后的3，但是对于第二个3来说最佳的是到4，所以不满足单调性。正确的做法是对median进行binary search，对于>=median的元素变为1，否则变为-1，然后检测是否有一个subarray的和>0（等于0的时候说明个数一样，所以会取<median的那个），因此要找到一个长度至少为k的最大的subarray。做prefix sum，对于[1, r]，在[1, r-k]的范围内找最小值，即取min，这样相减来找到最大的差值
+E: 不能直接连接u和下一个点v，因为这样最多会有O(n^2)条边。对于经过u的所有roads，比如这里的ab, ac，我们希望将u替换成一系列中间点，使得a经过中间点到达别的点的距离还是一样的。中间点也是city，也记录了到city1的距离。接下来得要满足w(a->mid)+w(mid->b)=(w(a->u)+w(u->b))^2, w(a->mid)+w(mid->c)=(w(a->u)+w(u->c))^2。比如a到u的距离是5，则a连到u5，w(a, u5)=0，然后w(u5, b)=(5+w(u, b))^2，所以这里的每个中间点代表的是上一条边的w。把每个点拆为1+50个点，变为directed graph，当连接a->u时，需要将a0连到u中w(a->u)的点，并将1-50都连到u0
+a b c 
+\ | /
+1...50
+/ | \
+a b c
+a 0 1 2 3
+   \
+u 0 1 2 3
+   / / /
+  |-<-<
+b 0 1 2 3
+这样总共会有O(m*50)条边，总时间复杂度是O(m*50*log(m*50))

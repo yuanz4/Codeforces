@@ -1,0 +1,2 @@
+https://codeforces.com/group/tKC7z9Nm0A/contest/324830
+C: 如果暴力地写的话是n^2，因为我们要对范围进行+1的操作。也可以对区间的左右端用标记的方法，开始的地方+k，结束的地方-k。然后在算count[i]的时候计算prefix sum

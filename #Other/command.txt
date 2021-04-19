@@ -1,4 +1,4 @@
-g++ -std=c++17 A.cpp && ./a.out < in > out
+g++ -std=c++17 A.cpp && ./a.out < in
 
 g++ -std=c++17 -g A.cpp && gdb --args ./a.out
-run < in > out
+run < in
