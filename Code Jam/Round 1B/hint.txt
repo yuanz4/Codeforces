@@ -1,0 +1,4 @@
+https://codingcompetitions.withgoogle.com/codejam/round/0000000000435baf
+A: 
+B: 对于test1，用greedy，可以发现当m=29的时候可以取到所有都是20的情况。对于test2，可以发现最后可以达到的值是n=m-x*a-y*b，根据裴蜀定理，可以发现g=gcd(a, b), n%g=m%g。然后通过实验检验每个prime的组合，可以发现最大的m是402，但在实际比赛中应该不会去证明，取到O(n^2)极限的值1e5即可
+C: 
